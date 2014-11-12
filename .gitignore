@@ -1,0 +1,45 @@
+# standard gitignore for WARP projects
+
+# OSX
+.DS_Store
+*.swp
+*~.nib
+# Thumbnails
+._*
+
+#archives
+*.zip
+*.tar.gz
+*.tar
+
+#pkg
+*.pkg
+Deploy/
+
+# XCode
+*.pbxuser
+*.perspective
+*.perspectivev3
+*.mode1v3
+*.mode2v3
+*.user
+# XCode 4
+xcuserdata/
+*.xcworkspace
+
+# build dir
+build/
+obj/
+Debug*/
+Release*/
+
+# products
+*.o
+*.mode*
+*.dSYM
+*.app/
+*.pyc
+*.service/
+
+# allow some flat files for this project i.e. ico
+
