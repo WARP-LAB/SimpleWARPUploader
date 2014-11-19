@@ -1,0 +1,26 @@
+[
+  {
+    "caption": "Preferences",
+    "mnemonic": "n",
+    "id": "preferences",
+    "children": [
+      {
+        "caption": "Package Settings",
+        "mnemonic": "P",
+        "id": "package-settings",
+        "children": [
+          {
+            "caption": "SimpleWARPUploader",
+            "children": [
+              {
+                "command": "open_file",
+                "args": {"file": "${packages}/SimpleWARPUploader/SimpleWARPUploader.settings-template"},
+                "caption": "Show Settings Template"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

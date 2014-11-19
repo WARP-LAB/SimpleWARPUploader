@@ -1,0 +1,55 @@
+{
+  "warpunison": [
+    {
+      "connection": [
+        {
+          "host": "my.project.host.tld",
+          "port": "22",
+          "username": "myusername",
+          "remotepath": "/absolute/path/to/project/root",
+          "remoteuri": "http://www.mypage.tld",
+          "openuri": 0
+        }
+      ],
+      "ignores": [
+        "comma",
+        "seperat.ed",
+        "/ignores",
+        "that/uses/regex/",
+		"*.and.wildcards"
+      ],
+      "opts": [
+        {
+          "batch": 1
+        }
+      ]
+    }
+  ],
+  "warpsync": [
+    {
+      "connection": [
+        {
+          "host": "my.project.host.tld",
+          "port": "22",
+          "username": "myusername",
+          "remotepath": "/absolute/path/to/project/root",
+          "remoteuri": "http://www.mypage.tld",
+          "openuri": 0
+        }
+      ],
+      "opts": [
+        {
+          "delifnotonlocal": 1,
+          "deleteexcluded": 0
+        }
+      ],
+      "excludes": [
+        "comma",
+        "seperat.ed",
+        "/ignores",
+        "that/uses/regex/",
+		"*.and.wildcards"
+      ]
+    }
+  ]
+}
