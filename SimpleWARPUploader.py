@@ -15,7 +15,7 @@ import sys
 import glob
 import os
 import json
-from pprint import pprint
+# from pprint import pprint
 
 # ###################################
 # Unison part
@@ -62,13 +62,13 @@ class WarpThreadedUnison(threading.Thread):
         
         cmd = 'unison -ui text ' + unisonMode + ignoreStrComp + self.projFolder + ' ' +  'ssh://'+ remoteUser + '@' + remoteHost + ':' + remotePort + '/' + remotePath
                 
-        print "WARPUNISON | start"
-        print cmd
+        print("WARPUNISON | start")
+        print(cmd)
         
         for line in runUnison(cmd):
-            print line,
+            print(line),
 
-        print "WARPUNISON | done"
+        print("WARPUNISON | done")
 
         if ( int(self.settings["warpunison"][0]["connection"][0]["openuri"]) == 1):
             os.system('open \'' + str(self.settings["warpunison"][0]["connection"][0]["remoteuri"]) + '\'')
@@ -77,22 +77,22 @@ class WarpThreadedUnison(threading.Thread):
 class WarpUnisonCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         #self.window.active_view().insert(edit, 0, "inview")
-        print "WARPUNISON | starting"
+        print("WARPUNISON | starting")
         currWindow = self.view.window()
         folders = currWindow.folders()
         foldersLen = len(folders)
         if (foldersLen > 1):
-            print "WARPUNISON | more than one folder at project top level found, aborting"
+            print("WARPUNISON | more than one folder at project top level found, aborting")
             for folder in folders:
-                print folder
-            print "WARPUNISON | abort"
+                print(folder)
+            print("WARPUNISON | abort")
             return
         elif (foldersLen == 0):
-            print "WARPUNISON | there must be one top level directory, aborting"
+            print("WARPUNISON | there must be one top level directory, aborting")
             return
         else:
             projFolder = str(folders[0])
-            print "WARPUNISON | project folder: " + projFolder;
+            print("WARPUNISON | project folder: " + projFolder)
             
             uploadConfigFound = 0;
 
@@ -112,11 +112,11 @@ class WarpUnisonCommand(sublime_plugin.TextCommand):
                     return
                 else:
                     if ( str(settings["folders"][0]["path"]) != str(projFolder) ):
-                        print "WARPUNISON | physical folder differs from sublime-project path entry (under folders)! aborting"
+                        print("WARPUNISON | physical folder differs from sublime-project path entry (under folders)! aborting")
                         return
 
             projFilePath =  str(projFileSearch[0])
-            print "WARPUNISON | project file: " + projFilePath
+            print("WARPUNISON | project file: " + projFilePath)
 
             settings = loadUnisonSettings(projFilePath)
             #pprint(settings)
@@ -166,13 +166,13 @@ class WarpThreadedRsync(threading.Thread):
 
         cmd = 'rsync --progress -vv -az --update ' + deleteIfNotLocal + excludeStrComp + deleteExcluded + self.projFolder + '/ ' + '-e \'ssh -p ' + remotePort + '\' ' + remoteUser + '@' + remoteHost + ':' + remotePath
         
-        print "WARPSYNC | start"
+        print("WARPSYNC | start")
 
         #os.system(cmd)
         for line in runRsync(cmd):
-            print line,
+            print(line)
 
-        print "WARPSYNC | done"
+        print("WARPSYNC | done")
 
         if ( int(self.settings["warpsync"][0]["connection"][0]["openuri"]) == 1):
             os.system('open \'' + str(self.settings["warpsync"][0]["connection"][0]["remoteuri"]) + '\'')
@@ -181,22 +181,22 @@ class WarpThreadedRsync(threading.Thread):
 class WarpRsyncCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         #self.window.active_view().insert(edit, 0, "inview")
-        print "WARPSYNC | starting"
+        print("WARPSYNC | starting")
         currWindow = self.view.window()
         folders = currWindow.folders()
         foldersLen = len(folders)
         if (foldersLen > 1):
-            print "WARPSYNC | more than one folder at project top level found, aborting"
+            print("WARPSYNC | more than one folder at project top level found, aborting")
             for folder in folders:
-                print folder
-            print "WARPSYNC | abort"
+                print(folder)
+            print("WARPSYNC | abort")
             return
         elif (foldersLen == 0):
-            print "WARPSYNC | there must be one top level directory, aborting"
+            print("WARPSYNC | there must be one top level directory, aborting")
             return
         else:
             projFolder = str(folders[0])
-            print "WARPSYNC | project folder: " + projFolder;
+            print("WARPSYNC | project folder: " + projFolder)
             
             uploadConfigFound = 0;
 
@@ -216,11 +216,11 @@ class WarpRsyncCommand(sublime_plugin.TextCommand):
                     return
                 else:
                     if ( str(settings["folders"][0]["path"]) != str(projFolder) ):
-                        print "WARPUNISON | physical folder differs from sublime-project path entry (under folders)! aborting"
+                        print("WARPUNISON | physical folder differs from sublime-project path entry (under folders)! aborting")
                         return
 
             projFilePath =  str(projFileSearch[0])
-            print "WARPSYNC | project file: " + projFilePath
+            print("WARPSYNC | project file: " + projFilePath)
 
             settings = loadRsyncSettings(projFilePath)
             #pprint(settings)
