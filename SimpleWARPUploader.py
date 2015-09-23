@@ -164,7 +164,15 @@ class WarpThreadedRsync(threading.Thread):
         remoteUser = str(self.settings["warpsync"][0]["connection"][0]["username"])
         remotePath = str(self.settings["warpsync"][0]["connection"][0]["remotepath"])
 
-        cmd = 'rsync --progress -vv -az --perms --update ' + deleteIfNotLocal + excludeStrComp + deleteExcluded + self.projFolder + '/ ' + '-e \'ssh -p ' + remotePort + '\' ' + remoteUser + '@' + remoteHost + ':' + remotePath
+        # -az : v1
+        # -az --no-o --no-g : v2
+        # -az --chmod=u+rwx,g+rx : v3
+        # http://serverfault.com/questions/364709/how-to-keep-rsync-from-chowning-transfered-files
+        # http://unix.stackexchange.com/questions/12198/preserve-the-permissions-with-rsync
+        #  -a, --archive    archive mode; equals -rlptgoD (no -H,-A,-X)
+        # http://www.comentum.com/rsync.html
+
+        cmd = 'rsync --progress -vv -az --chmod=u+rwx,g+rx --update ' + deleteIfNotLocal + excludeStrComp + deleteExcluded + self.projFolder + '/ ' + '-e \'ssh -p ' + remotePort + '\' ' + remoteUser + '@' + remoteHost + ':' + remotePath
         
         print("WARPSYNC | start")
 
